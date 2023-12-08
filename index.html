@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>在线编写和实时显示代码结果</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#runBtn").click(function() {
+                var code = $("#code").val();
+                var language = $("#language").val();
+                
+                $.ajax({
+                    url: "execute.php",
+                    method: "POST",
+                    data: { code: code, language: language },
+                    success: function(response) {
+                        $("#result").html(response);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>在线编写和实时显示代码结果</h2>
+    
+    <textarea id="code" rows="10" cols="50"></textarea>
+    
+    <br>
+    
+    <select id="language">
+        <option value="php">PHP</option>
+        <option value="javascript">JavaScript</option>
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="ruby">Ruby</option>
+        <option value="c">C</option>
+    </select>
+    
+    <button id="runBtn">运行</button>
+    
+    <br>
+    
+    <div id="result"></div>
+</body>
+</html>
